@@ -1,1 +1,36 @@
+W02 NOTES- MOBILE APPLICATION AND DEV.
+
+The Coding Ninja textbook:
+Ch. 2
+
+There’s no need to actually use a semicolon to terminate a statement because JavaScript interpreters use a process called Automatic Semicolon
+const message = 'Hello World!';alert(message); -OK
+
+const message = 'Hello World!';
+
+alert(message); -Best
+
+The primitive data types include strings, symbols, numbers, Boolean, undefined, Null
+
+Ex: typeof 'hello'
+<< 'string'
+typeof 10
+<< 'number'
+typeof true
+<< 'boolean'
+typeof { ninja: 'turtle' }
+<< 'object'
+typeof [ 1, 2, 3 ]
+<< 'object' (All non-primitive data types return a type of 'object'.)
+
+Variables are used in programming languages to refer to a value stored in memory.
+Something to keep in mind when writing code in Javascript is the idea of “using let and const have block scope, which is discussed in more detail below. They also prevent you from overwriting any built-in methods by assignment, which is generally frowned upon, whereas using var doesn't.”
+
+Scope is an important concept in programming. It refers to where a constant or variable is accessible by the program. There are two common scopes that are often referred to in programs: global scope and local scope.
+Think Ben, what is the difference between Global and local scope?
+If you don’t use let or const then your things variables will be defined as global variables.
+
+The backslash is used to escape special characters in strings such as:
+•	Single quote marks \'
+•	Double quote marks \"
 
