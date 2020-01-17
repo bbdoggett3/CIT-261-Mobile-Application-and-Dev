@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Team Activity Week 2</title>
+	<script>
+		//REQUIREMENT 1
+		function req1() {
+			const input = document.getElementById("req1_text").value;
+			const output = document.getElementById("output1");
+			output.innerHTML = input;
+
+		}
+
+		//REQURIEMENT 2
+		function req2() {
+			const input = document.getElementById("req2_text").value;
+			const output = document.getElementById("output2");
+			const inputInt = parseInt(input)
+			if (inputInt !== NaN) {       //NOT FINISHED?
+				output.innerHTML = "total will =" + numberSum(inputInt);
+			}
+		}
+
+		//REQUREMENT 2 SUM
+		function numberSum(n) {
+  			let total = 0;
+    			for(let i = 1; i <= n; i++) {
+     		 total += i;
+    	}
+    		return total;
+	}
+
+		//REQUIREMENT 3
+		function req3() {
+			const num1 = document.getElementById("req3_num1").value;
+			const num2 = document.getElementById("req3_num2").value;
+			const output = document.getElementById("output3");
+
+			const float1 = parseFloat(num1);
+			const float2 = parseFloat(num2);
+
+			if ((float1 !== NaN) & (float2 !== NaN)) {       //NOT FINISHED?
+				const total = float1 + float2;
+				output.innerHTML = "Total = " + total;
+
+			}
+		}
+	
+		
+
+	</script>
+</head>
+<body>
+	<!--REQUIREMENT 1 -->
+	<input id="req1_text" type="text" placeholder="put text">
+	<button onclick="req1()">Click</button>
+	<div id="output1"></div>
+
+	<!--REQUIREMENT 2-->
+	<input id="req2_text" type="text" placeholder="number">
+	<button onclick="req2()">Click</button>
+	<div id="output2"></div>
+
+	<!--REQUIREMENT 3 -->
+	<input id="req3_num1" type="number" placeholder="number">
+	<input id="req3_num2" type="number" placeholder="number">
+	<button onclick="req3()">+</button>
+	<div id="output3"></div>
+
+
+</body>
+</html>
