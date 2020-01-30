@@ -126,3 +126,36 @@ Chapter 15 Modular JavaScript
 Modular JavaScript:
 A module is a self-contained piece of code that provides functions and methods that can then be used in other files and by other modules. This helps to keep code organized in separate, reusable files, which improves code maintainability. The code in a module should have a single purpose, and group together functions with distinct functionality.
 The coupling of code refers to how dependent certain elements or modules of code are on each other. 
+
+SANDBOX PRATICE PROBLEM #2 FUNCTIONS:
+1
+// Your code here.
+2
+function isEven(a) {
+3
+  if(a % 2) {
+4
+    return false;
+5
+  }
+6
+  else return true;
+7
+}
+8
+​
+9
+console.log(isEven(50));
+10
+// → true
+11
+console.log(isEven(75));
+12
+// → false
+13
+console.log(isEven(-1));
+14
+// → ??
+true
+false
+false
