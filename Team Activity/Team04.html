@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title>Tic Tac Toe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<style type="text/css">
+
+		h1 {
+			text-align: center;
+			color: blue;
+		}
+
+		td {
+			width: 100px;
+			height: 100px;
+
+		}
+
+		.vertical {
+			border-left: 3px solid purple;
+			border-right: 3px solid purple;
+
+		}
+
+		.bottom {
+			border-bottom: 3px solid purple;
+		}
+
+		#verticalBottom {
+			border-bottom: 3px solid purple;
+		}
+
+		table {
+			margin: auto;
+		}
+
+	</style>
+
+	<script>
+		const vertical = document.querySelector('.vertical');
+		const bottom = document.querySelector('.bottom');
+		const verticalBottom = document.querySelector('#verticalBottom');
+		const resetButton = document.getElementById('reset');
+
+		const player1 = "X";
+		const player2 = "O";
+		let player = player1
+
+		function turn(e) {
+			console.log(e.target);
+			e.target.innerHTML = player;
+			if (player === player1) {
+				player = player2;
+			}
+
+			else {
+				player = player1;
+			}
+		}
+
+		function gameBoard() {
+			console.dir(vertical, bottom, verticalBottom);
+			for(let i = 0; i< )
+		}
+
+		document.getElementById(gameBoard).addEventListener("touchend", turn());
+
+	</script>
+
+</head>
+<body>
+
+<h1>Tic Tac Toe Board</h1>
+<div>
+	<table class= "gameBoard">
+	<tr>
+		<td class="bottom"></td>
+		<td class="vertical" id="verticalBottom"></td>
+		<td class="bottom"></td>
+	</tr>
+	<tr>
+		<td class="bottom"></td>
+		<td class="vertical" id="verticalBottom"></td>
+		<td class="bottom"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td class="vertical"></td>
+		<td></td>
+	</tr>
+</table>
+</div>
+
+<button id="reset">Reset</button>
+
+</body>
+</html>
