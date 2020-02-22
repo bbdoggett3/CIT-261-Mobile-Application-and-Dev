@@ -1,0 +1,87 @@
+Mobile Application and Development Notes
+Notes W07
+Chapter 11
+The fact that functions are first-class objects means they can have properties and methods themselves. For example, all functions have a length property that returns the number of parameters the function has.
+Let’s use the square() function that we wrote in chapter 4 as an example:
+function square(x) {
+    return x*x;
+}
+If we query the length property, we can see that it accepts one parameter:
+square.length
+<< 1
+
+The call() method can be used to set the value of this inside a function to an object that is provided as the first argument.
+In the following example, the sayHello() function refers to an unspecific object called this that has a property called name :
+function sayHello(){
+    return `Hello, my name is ${ this.name }`;
+}
+We can create some objects that have a name property, then use the call() method to invoke the sayHello() function, providing each object as an argument. This will then take the value of this in the function:
+const clark = { name: 'Clark' };
+const bruce = { name: 'Bruce' };
+sayHello.call(clark);
+<< 'Hello, my name is Clarke'
+sayHello.call(bruce);
+<< 'Hello, my name is Bruce
+
+Ben you need to practice this idea of this and call().
+Memoization
+A useful feature of this is that it provides result caching, ormemoization.
+If a function takes some time to compute a return value, we can save the result in a cache property. Then if the same argument is used again later, we can return the value from the cache, rather than having to compute the result again. For example, say squaring a number was an expensive computational operation that took a long time. We could rewrite the square() function so it saved each result in a cache object that is a property of the function:
+function square(x){
+    square.cache = square.cache || {};
+    if (!square.cache[x]) {
+        square.cache[x] = x*x;
+    }
+    return square.cache[x]
+}
+If we try calling the function a few times, we can see that the cache object stores the results:
+square(3);
+<< 9
+square(-11);
+<< 121
+square.cache;
+<< {"3": 9, "-11": 121}
+
+Callbacks
+We covered callbacks in Chapter 4. You’ll recall that they’re functions passed to other functions as arguments and then invoked inside the function they are passed to.
+A function that returns a function:
+This might seem a bit pointless, but let's now take it a step further and use this technique to create a generic 'greeter' function that takes a particular greeting as a parameter, then returns a more specific greeting function:
+function greeter(greeting = 'Hello') {
+    return function() {
+        console.log(greeting);
+    }
+}
+const englishGreeter = greeter();
+englishGreeter();
+<< Hello
+const frenchGreeter = greeter('Bonjour');
+frenchGreeter();
+<< Bonjour
+const germanGreeter = greeter('Guten Tag');
+germanGreeter();
+<< Guten Tag
+
+In javascript it is functional programming so it can carry with it some pure functions. This means the following:
+Pure Functions
+A key aspect of functional programming is its use of pure functions. A pure function is a function that adheres to the following rules:
+1) The return value of a pure function should only depend on the values provided as arguments. It doesn't rely on values from somewhere else in the program.
+2) There are no side-effects. A pure function doesn't change any values or data elsewhere in the program. It only makes non-destructive data transformations and returns new values, rather than altering any of the underlying data.
+3) Referential transparency. Given the same arguments, a pure function will always return the same result.
+Chapter 12 AJAX
+Ajax is a technique that allows web pages to communicate asynchronously with a server, and it dynamically updates web pages without reloading. This enables data to be sent and received in the background, as well as portions of a page to be updated in response to user events, while the rest of the program continues to run.
+JavaScript
+JavaScript was always considered a 'front-end' language, not used to communicate with the server. Ajax enabled JavaScript to send requests and receive responses from a server, allowing content to be updated in real time.
+Basic Usage
+The Fetch API provides a global fetch() method that only has one mandatory argument, which is the URL of the resource you wish to fetch. A very basic example would look something like the following piece of code:
+fetch('https://example.com/data')
+.then( // code that handles the response )
+.catch( // code that runs if the server returns an error )
+As you can see, the fetch() method returns a promise that resolves to the response returned from the URL that was provided as an argument. In the example above, the promise will be resolved when a response is received from the URL 'https:example.com/data'. Because it’s a promise, we can also use a catch statement at the end to deal with any errors that may occur.
+Text Responses
+The text() method takes a stream of text from the response, reads it to completion and then returns a promise that resolves to a USVSting object that can be treated as a string in JavaScript.
+Here is an example of how a text response promise would be resolved:
+fetch(url)
+.then( response => response.text() ); // transforms the text stream into a JavaScript string
+.then( text => console.log(text) )
+.catch( error => console.log('There was an error: ', error))
+In this example, once the promise has been resolved, we use the string() method to return a promise that resolves with a string representation of the text that was returned. In the next statement, we take the result of the promise and use console.log() to display the text in the console.
