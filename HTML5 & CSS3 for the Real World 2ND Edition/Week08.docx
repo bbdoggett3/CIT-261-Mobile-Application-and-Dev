@@ -1,0 +1,121 @@
+HTML5 & CSS3 for the Real World 2ND Edition Reading Notes W08
+
+Ch. 8 CSS3 Transforms and Transitions:
+Transforms:
+The CSS3 transform property lets you lets you translate, rotate, scale, and/or skew any element on the page.
+Translation:
+Translation functions allow you to move elements left, right, up, or down. These functions are similar to the behavior of position: relative; when declaring top and left , moving elements up and down or left and right along the x and y axes. 
+The translate(x,y) function moves an element x from the left, and y from the top:
+transform: translate(45px, -45px);
+
+In the reading we have an example of a picture that we want to have a guy punching the words. In order to do this we need to create a Transform that can move on the X and Y axis for example:
+-webkit-transform: translate(45px,-45px); /* iOS8, Android 
+↵4.4.3, BB10 */
+-ms-transform: translate(45px,-45px); /* IE9 only */
+transform: translate(45px,-45px);
+If you only want to move an element vertically or horizontally, you can use the translatex or translatey functions respectively. To move 45px to the right along the x axis, include:
+transform: translateX(45px);
+To move up along the y axis by 30px, include:
+transform: translateY(-30px);
+For our ad, we want to move the word “dukes” over to the right when the user hovers over it, as if it had been punched by our mustachioed pugilist. In the markup, we have:
+<h1>Put your <span>dukes</span> up, sire</h1>
+
+Go to W3Schools Ben to learn more about this…
+Scaling: 
+The scale(x,y) function scales an element by the defined factors horizontally then vertically. If only one value is provided, it will be used for both the x and y values, growing or shrinking your element or pseudo-element while maintaining the original aspect ratio. For example, scale(1) would leave the element the same size, scale(2) would double its proportions, scale(0.5) would halve them.
+transform: scale(1.5, 0.25);
+
+This is an interesting situation cause now we can move the words on the HTML and also scale it.
+Let’s add a scale transform to our span:
+.ad-ad2 h1:hover span {
+    color: #484848;  
+    transform: translateX(40px) scale(1.5);
+}
+
+Rotation:
+The rotate() function rotates an element around the point of origin by a specified angle value. As with scale , by default the point of origin is the element’s center.
+Let’s add a rotate transform to our “dukes”:
+.ad-ad2 h1:hover span {
+    color: #484848;
+    transform: rotate(10deg) translateX(40px) scale(1.5);
+}
+
+It is being rotated by 10 degrees…
+You can also use one more type of transform on your HTML page called skew that is really helpful the syntax for that is as follows: 
+he skew(x,y) function specifies a skew along the x and y axes. As you’d expect, the x specifies the skew on the x axis, and the y specifies the skew on the y axis. If the second parameter is omitted, the skew will only occur on the x axis:
+transform: skew(15deg, 4deg);
+
+When you are working with transforms you need to choose your ordering carefully. This would include using the translate on the X axis vs using the rotate.
+
+Transitions:
+Transitions allow the values of CSS properties to change over time, essentially providing simple animations.
+Here are the steps to create a simple transition using only CSS:
+1.	Declare the original state of the element in the default style declaration.
+2.	Declare the final state of your transitioned element; for example, a :hover state.
+3.	Include the transition functions in your default style declaration using the transition properties, including: transition-property , transition-duration , transition-timing-function , and transition-delay . We’ll look at each of these and how they work shortly.
+
+In the case of our ad, we’ll apply the transition to the transform property:
+.ad-ad2 h1 span {
+    transition-property: transform;
+}
+
+The transition-duration property sets how long the transition will take: the duration of time it takes to go from the default state to the transitioned state. You can specify this either in seconds ( s ) or milliseconds ( ms ). We’d like our animation to be fairly quick, so we’ll specify 0.2 seconds ( 0.2s ), or 200 milliseconds ( 200ms ):
+transition-duration: 0.2s;
+
+For our transition, we’ll use ease-out :
+transition-timing-function: ease-out;
+
+Finally, by using the transition-delay property, it’s possible to introduce a delay before the transition begins. Normally a transition begins immediately, so the default is 0 . Include the number of milliseconds ( ms ) or seconds ( s ) to delay the transition. We don’t want our transition to start immediately, because that might be a bad user experience if the user accidentally mouses through our ad on the way from one part of the document to the next. A 50ms delay is enough time to wait to be sure they are intentionally hovering over our advertisement:
+-webkit-transition-delay: 50ms;
+transition-delay: 50ms;
+
+When would you exactly want to use a delay?
+Let’s take another look at our transition so far:
+.ad-ad2 h1 span {
+    transition-property: transform; 
+    transition-duration: 0.2s;  
+    transition-timing-function: ease-out;
+    transition-delay: 50ms;
+}
+Now let’s combine all those values into a shorthand declaration:
+.ad-ad2 h1 span {
+    transition: transform 0.2s ease-out 50ms;
+}
+
+Keyframes:
+To create an animation, use the @keyframes rule for IE10+ and FF16+. Include @-webkit-keyframes for all WebKit implementations followed by a name of your choosing, which will serve as the identifier for the animation. Then, you can specify your keyframes.
+For an animation called myAnimation , the @keyframes rule would look like this:
+@-webkit-keyframes myAnimation { 
+    /* put animation keyframes here */
+}
+@keyframes myAnimation { 
+    /* put animation keyframes here */
+}
+The Shorthand animation Property
+Fortunately, there’s a shorthand for all of these animation properties, especially since we’re still including the -webkit- prefix. The animation property takes as its value a space-separated list of values for the longhand animation-name , animation-duration , animation-timing-function , animation-delay , animation-iteration-count , animation-direction , animation-fill-mode , and animation-play-state properties:
+.verbose {
+    animation-name: appearDisappear; 
+    animation-duration: 300ms; 
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-delay: 5s;
+    animation-fill-mode: backwards;
+    animation-play-state: running;
+}
+/* shorthand */
+.concise {
+    animation: 300ms ease-in alternate 5s backwards appearDisappear;
+}
+Note that in the shorthand version, we’ve left out the animation-iteration-count and animation-play-state since both were set to default.
+Ch. 12 Canvas, SVG, and Drag and Drop
+Let’s add a width and height attribute to the canvas element:
+<canvas id="myCanvas" class="myCanvas" width="200" height="200">
+    Sorry! Your browser doesn’t support Canvas.
+</canvas>
+Finally, let’s add a border to our canvas using some CSS to visually distinguish it on the page. Canvas has no default styling, so it’s difficult to see where it is on the page unless you give it some kind of border:
+.myCanvas {
+    border: dotted 2px black;
+}
+Now that we’ve styled it, we can actually view the canvas container on our page; Figure 12.1 shows what it looks like.
+ 
