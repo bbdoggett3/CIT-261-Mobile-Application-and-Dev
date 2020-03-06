@@ -1,0 +1,124 @@
+Benjamin Doggett
+3/6/2020
+Mobile Application and Dev
+
+Chapter 9 The Window Object 
+The Browser Object Model
+The Browser Object Model (or BOM for short) is a collection of properties and methods that contain information about the browser and computer screen.
+Global variables are actual properties of a global object. In a browser environment, the global object is the window object. This means that any global variable created is actually a property of the window object, as can be seen in the example below:
+x = 6;  // global variable created
+<< 6
+window.x // same variable can be accessed as a property of the window object
+<< 6
+// both variables are exactly the same
+window.x === x;
+<< true
+
+These will come in handy when dealing with your own personal program or application. It would be beneficial to use this when working with some type of UI.
+The window.confirm() method will stop the execution of the program and display a confirmation dialog that shows the message provided as an argument, and giving the options of OK or Cancel. It returns the boolean values of true if the user clicks OK, and false if the user clicks Cancel:
+window.confirm('Do you wish to continue?');
+<< undefined
+
+The window.prompt() method will stop the execution of the program. It displays a dialog that shows a message provided as an argument, as well as an input field that allows the user to enter text. This text is then returned as a string when the user clicks OK. If the user clicks Cancel, null is returned:
+window.prompt('Please enter your name:');
+
+Location, Location, Location
+The window.location property is an object that contains information about the URL of the current page. It contains a number of properties that provide information about different fragments of the URL.
+The href property returns the full URL as a string:
+window.location.href 
+<< "https://www.sitepoint.com/premium/books/javascript-novice-to-ninja"
+
+You may want to study a little more about location and the propertys you can do with them.
+The Browser History
+The window.history property can be used to access information about any previously visited pages in the current browser session. Avoid confusing this with the new HTML5 History API. (See http://www.sitepoint.com/javascript-history-pushstate/ post for details.)
+The window.history.length property shows how many pages have been visited before arriving at the current page.
+The window.history.go() method can be used to go to a specific page, where 0 is the current page:
+window.history.go(1); // goes forward 1 page
+window.history.go(0); // reloads the current page
+window.history.go(-1); // goes back 1 page
+
+Controlling Windows
+A new window can be opened using the window.open() method. This takes the URL of the page to be opened as its first parameter, the window title as its second parameter, and a list of attributes as the third parameter. This can also be assigned to a variable, so the window can then be referenced later in the code:
+const popup = window.open('https://sitepoint.com','
+SitePoint','width=400,height=400,resizable=yes');
+
+Never USE THIS!!!!!!
+document.write()
+The write() method simply writes a string of text to the page. If a page has already loaded, it will completely replace the current document:
+document.write('Hello, world!');
+This would replace the whole document with the string Hello, world! . It is possible to include HTML in the string and this will become part of the DOM tree. For example, the following piece of code will create an <h1> tag node and a child text node:
+document.write('<h1>Hello, world!</h1>');
+The document.write() method can also be used within a document inside <script> tags to inject a string into the markup. This will not overwrite the rest of the HTML on the page. The following example will place the text "Hello, world!" inside the <h1> tags and the rest of the page will display as normal:
+<h1>
+    <script>document.write("Hello, world!")</script>
+</h1>
+
+COOKIE:
+To create a cookie, you assign it to JavaScript’s “cookie jar”, using the document.cookie property, like so:
+document.cookie = 'name=Superman';
+<< "name=Superman"
+The document.cookie property acts like a special type of string. Assigning another cookie to it won’t overwrite the entire property, it will just append it to the end of the string. So we can add more cookies by assigning them to document.cookie :
+document.cookie = 'hero=true';
+<< "hero=true"
+document.cookie = 'city=Metropolis';
+<< "city=Metropolis"
+
+Timing Functions
+ setTimeout()
+The window object provides some useful methods for scheduling the execution of a function, and for repeatedly executing functions at regular intervals.
+The window.setTimeout() method accepts a callback to a function as its first parameter and a number of milliseconds as its second parameter. Try entering the following example into a console. It should show an alert dialog after three seconds (that’s 3000 milliseconds):
+window.setTimeout( () => alert("Time's Up!"), 3000);
+<< 4
+
+Chapter 14 HTML5 API’s
+The data- Attribute
+The data- attribute is a way of embedding data in a web page using custom attributes that are ignored by the browser. They’re also private to a page, so are not intended to be used by an external service – their sole purpose is to be used by a JavaScript program. This means they’re perfect for adding data that can be used as a hook that the program utilizes to access information about a particular element on the page.
+There are a lot of APIS that you can use Ben but hopefully this chapter will help teach which ones they are.
+HTML5 APIs
+The HTML5 specification contains a number of APIs that help to gain access to hardware, such as cameras, batteries, geolocation, and the graphics card. Hardware evolves quickly, and APIs are frequently introduced to give developers access, and control new features that appear in the latest devices.
+
+HTML5 Web Storage
+The Web Storage API provides a key-value store on the client’s computer that is similar to using cookies but has fewer restrictions, more storage capacity, and is generally easier to use. This makes it perfect for storing information about users, as well as storing application-specific information that can then be used during future sessions.
+An unresponsive script
+To get started, use the Worker() constructor function to create a new worker:
+const worker = new Worker('task.js');
+
+Let's create an event handler to deal with the response:
+connection.addEventListener('message', (event) => {
+    output(`RESPONSE: ${event.data}`);
+}, false);
+This uses the event object that is provided as an argument to the event, and we can use the data property to access the data that was returned. It's then a simple case of using the output() function again to add this message to the growing stream of messages in the 'output' <div> , but this time with the phrase 'RESPONSE:' added to the beginning.
+If you open websocket.html in a browser, you should see something similar to in the screenshot below:
+Multimedia
+Before HTML5, it was notoriously difficult to display audio and video in browsers, and plugins such as Flash often had to be used. HTML5 introduced the <audio> and <video> tags used to insert audio and video clips into a web page. It also introduced a Media API for controlling the playback of the clips using JavaScript.
+An audio clip can be inserted into a page with the <audio> tag, using the src attribute to point to the audio file:
+<audio src='/song.mp3' controls>
+Your browser does not support the audio element.
+</audio>
+A video clip can be inserted with the <video> tag, using the src attribute to point to the movie file:
+<video src='http://movie.mp4' controls>
+    Your browser does not support the video element.
+</video>
+Any content inside the <audio> or <video> tags will only display if the browser does not support them; hence, it can be used to display a message to users of older browsers without support for these features. The controls attribute can be added (without any value) and will display the browser’s native controls, such as play, pause, and volume control, as can be seen in the screenshot below.
+ 
+Browser video controls
+The audio or video element can be referenced by a variable using one of the DOM methods we saw in Chapter 6:
+const video = document.getElementsByTagName('video')[0];
+Audio and video elements have a number of properties and methods to control the playback of the clip.
+The play() method will start the clip playing from its current position:
+video.play();
+The pause() method will pause the clip at its current position:
+video.pause();
+The volume property is a number that can be used to set the audio volume:
+video.volume = 0.9;
+The muted property is a boolean value that can be used to mute the audio:
+video.muted = true;
+The currentTime property is a number value that can be used to jump to another part of the clip:
+video.currentTime += 10; // jumps forward 10 seconds
+The playbackRate property is used to fast-forward or rewind the clip by changing its value. A value of 1 is playback at normal speed:
+video.playbackRate = 8; // fast-forward at 8 times as fast
+The loop property is a boolean value that can be set to true to make the clip repeat in a loop:
+video.loop = true;
+The duration property can be used to see how long the clip lasts:
+video.duration;
+<< 52.209
